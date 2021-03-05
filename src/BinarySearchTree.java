@@ -1,4 +1,3 @@
-import javax.swing.plaf.metal.MetalButtonUI;
 import java.util.Scanner;
 
 class Node{
@@ -26,12 +25,9 @@ public class BinarySearchTree {
             return false;
         if (head.key == key)
             return true;
-        else if (head.key >key){
+        else if (head.key >key)
             return searchKey(head.left,key);
-        }
-        else if (head.key < key){
+        else
             return searchKey(head.right,key);
-        }
-        return false;
     }
 }
