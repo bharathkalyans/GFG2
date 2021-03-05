@@ -22,6 +22,8 @@ public class BinarySearchTree {
 
 
     public boolean searchKey(Node head,int key){
+        if (head == null)
+            return false;
         if (head.key == key)
             return true;
         else if (head.key >key){
