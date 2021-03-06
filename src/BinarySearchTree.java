@@ -27,9 +27,7 @@ public class BinarySearchTree {
         root.right.right=new Node(23);
         root.right.right.right=new Node(39);
 
-        inorderTraversal(root);
-        deleteInBST(root,10);
-        inorderTraversal(root);
+        floorOFBST(root,30);
     }
 
 
@@ -101,6 +99,7 @@ public class BinarySearchTree {
        return head;
 
     }
+    //Finding the closest Successor to the deleting Node by finding in right sub tree of the Node.
     public static Node getSource(Node root){
         Node curr = root.right;
 
@@ -111,7 +110,21 @@ public class BinarySearchTree {
     }
 
 
+    public static Node floorOFBST(Node head,int key){
+        Node res=null;
 
+        while (head!=null ){
+            if (head.key ==key)
+                return head;
+            else if (head.key > key)
+                head=head.left;
+            else {
+                res=head;
+                head =head.right;
+            }
+        }
+        return res;
+    }
 
 
 }
