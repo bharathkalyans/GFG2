@@ -27,8 +27,8 @@ public class BinarySearchTree {
         root.right.right=new Node(23);
         root.right.right.right=new Node(39);
 
-        insertIntoBST(root,sc.nextInt());
-        System.out.println(returnMax(root,0));
+        inorderTraversal(root);
+        deleteInBST(root,10);
         inorderTraversal(root);
     }
 
@@ -55,6 +55,8 @@ public class BinarySearchTree {
         if (head == null)
             return new Node(key);
 
+        if(head.key == key)
+            return head;
         if (head.key >key)
             head.left = insertIntoBST(head.left,key);
         else
@@ -73,4 +75,43 @@ public class BinarySearchTree {
         else
             return searchKey(head.right,key);
     }
+
+
+    public static Node deleteInBST(Node head,int key){
+
+        if (head == null)
+            return null;
+        if (head.key > key){
+            head.left=deleteInBST(head.left,key);
+        }
+        else if(head.key < key){
+            head.right=deleteInBST(head.right,key);
+        }
+        else{
+            if (head.left == null)
+                return head.right;
+            if (head.right == null)
+                return head.left;
+            else {
+                Node source = getSource(head);
+                head.key=source.key;
+                head.right=deleteInBST(head.right, source.key);
+            }
+        }
+       return head;
+
+    }
+    public static Node getSource(Node root){
+        Node curr = root.right;
+
+        while (curr!=null && curr.left!=null){
+            curr =curr.left;
+        }
+        return curr;
+    }
+
+
+
+
+
 }
