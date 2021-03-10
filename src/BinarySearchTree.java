@@ -27,7 +27,8 @@ public class BinarySearchTree {
         root.right.right=new Node(23);
         root.right.right.right=new Node(39);
 
-        floorOFBST(root,30);
+
+
     }
 
 
@@ -126,5 +127,18 @@ public class BinarySearchTree {
         return res;
     }
 
-
+    public static Node ceilOFBST(Node head,int key){
+        Node res = null;
+        while (head!=null){
+            if (head.key == key)
+                return head;
+            else if(head.key < key)
+                head = head.right;
+            else {
+                res = head;
+                head = head.left;
+            }
+        }
+        return res;
+    }
 }
