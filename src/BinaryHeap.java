@@ -202,6 +202,36 @@ class BinaryHeap {
          return res;
     }
 
+
+    public static void printMedianOfStream(int [] arr){
+         PriorityQueue<Integer> s =new PriorityQueue<>(Collections.reverseOrder());
+         PriorityQueue<Integer> g =new PriorityQueue<>();
+
+         s.add(arr[0]);
+         System.out.println(arr[0]);
+         for (int i=1;i<arr.length;i++){
+             int x=arr[i];
+             if (s.size() > g.size()){
+                 if ( s.peek() > x){
+                     g.add(s.poll());
+                     s.add(x);
+                 }else g.add(x);
+                 System.out.println((double) (s.peek()+g.peek())/2);
+             }
+             else {
+                 if (s.peek() >= x){
+                     s.add(x);
+                 }
+                 else{
+                     g.add(x);
+                     s.add(g.poll());
+                 }
+                 System.out.println(s.peek());
+             }
+         }
+    }
+
+
     public static void main(String []args)
      {
          MinHeap h= new MinHeap(11);
