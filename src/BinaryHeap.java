@@ -1,6 +1,6 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.*;
 
 class BinaryHeap {
      public static class MinHeap{
@@ -164,6 +164,49 @@ class BinaryHeap {
     }
 
 
+    static class Triplet implements Comparator<Triplet>{
+
+        int val,aPos,vPos;
+        Triplet(int v,int ap,int vp){
+            val=v;
+            aPos =ap;
+            vPos=vp;
+        }
+
+        public int compare(Triplet o1, Triplet o2) {
+            if (o1.val <= o2.val)
+                return -1;
+            else
+                return 1;
+        }
+
+        public int compareTo(Triplet t){
+            if (val<=t.val)
+                return -1;
+            else
+                return 1;
+        }
+    }
+    public static List<Integer> mergeKArrays(List<List<Integer>> arr){
+         List<Integer> res =new ArrayList<>();
+
+         PriorityQueue<Triplet> pq=new PriorityQueue<>();
+
+         for (int i=0;i<arr.size();i++) pq.add(new Triplet(arr.get(i).get(0), i, 0));
+
+         while (!pq.isEmpty()){
+
+             Triplet curr = pq.poll();
+             res.add(curr.val);
+             int ap = curr.aPos;
+             int vp=curr.vPos;
+
+             if (vp+1 < arr.get(ap).size())
+                pq.add(new Triplet(arr.get(ap).get(vp+1),ap,vp+1));
+
+         }
+         return res;
+    }
 
     public static void main(String []args)
      {
@@ -173,8 +216,22 @@ class BinaryHeap {
          h.insert(15);
          h.insert(20);
 
-        int[] arr={10,30,5,40,38,80,70};
-         printKthClosestElements(arr,3,35);
+         List<List<Integer>> l= new ArrayList<>();
+
+         ArrayList<Integer> s1=new ArrayList<>();
+         ArrayList<Integer> s2=new ArrayList<>();
+         ArrayList<Integer> s3=new ArrayList<>();
+         s1.add(5);s1.add(10);
+         s2.add(9);s2.add(4);s2.add(90);
+         s3.add(6);
+
+        l.add(s1);
+        l.add(s2);
+        l.add(s3);
+
+         System.out.println(mergeKArrays(l));
+
+
      }
 }
 

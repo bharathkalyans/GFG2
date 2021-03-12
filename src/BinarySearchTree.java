@@ -33,7 +33,7 @@ public class BinarySearchTree {
 
     public Node mirror(Node node){
         if (node == null)
-            return null;
+            return node;
 
         Node left = mirror(node.left);
         Node right = mirror(node.right);
