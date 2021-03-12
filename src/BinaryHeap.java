@@ -164,7 +164,7 @@ class BinaryHeap {
     }
 
 
-    static class Triplet implements Comparator<Triplet>{
+    static class Triplet implements Comparable<Triplet>{
 
         int val,aPos,vPos;
         Triplet(int v,int ap,int vp){
@@ -173,12 +173,6 @@ class BinaryHeap {
             vPos=vp;
         }
 
-        public int compare(Triplet o1, Triplet o2) {
-            if (o1.val <= o2.val)
-                return -1;
-            else
-                return 1;
-        }
 
         public int compareTo(Triplet t){
             if (val<=t.val)
