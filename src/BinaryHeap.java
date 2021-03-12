@@ -1,5 +1,3 @@
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 
 class BinaryHeap {
@@ -239,22 +237,6 @@ class BinaryHeap {
          h.insert(2);
          h.insert(15);
          h.insert(20);
-
-         List<List<Integer>> l= new ArrayList<>();
-
-         ArrayList<Integer> s1=new ArrayList<>();
-         ArrayList<Integer> s2=new ArrayList<>();
-         ArrayList<Integer> s3=new ArrayList<>();
-         s1.add(5);s1.add(10);
-         s2.add(9);s2.add(4);s2.add(90);
-         s3.add(6);
-
-        l.add(s1);
-        l.add(s2);
-        l.add(s3);
-
-         System.out.println(mergeKArrays(l));
-
 
      }
 }
