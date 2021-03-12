@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 class BinaryHeap {
      public static class MinHeap{
@@ -88,18 +91,90 @@ class BinaryHeap {
      }
 
 
+    public static void printKClosestElementsNaive(int[] arr,int x,int k,int n){
+             Boolean []b=new Boolean[n];
+             Arrays.fill(b,false);
+
+             for (int  i=0;i<k;i++){
+                 int min_diff= Integer.MIN_VALUE;
+                 int min_diff_index = 1 ;
+
+                 for (int j=0;j<n;j++){
+                     if (!b[j] && Math.abs(arr[j]-x)<=min_diff){
+                         min_diff = Math.abs(arr[j] - x);
+                         min_diff_index = j;
+                     }
+                 }
+                 System.out.println(arr[min_diff_index]);
+                 b[min_diff_index] = true;
+             }
+    }
+
+    public static void printKthClosestElements(int [] arr,int k,int x){
+        PriorityQueue<Pair> pq = new PriorityQueue<>(
+                new Comparator<Pair>()
+                {
+                    public int compare(Pair p1, Pair p2)
+                    {
+                        return p2.getValue().compareTo(
+                                p1.getValue());
+                    }
+                });
+
+        for (int i=0;i<k;i++){
+            pq.add(new Pair(Math.abs(arr[i] - x), i));
+        }
+
+        for (int i=k;i<arr.length;i++){
+            int diff = Math.abs(arr[i] - x);
+            if (pq.peek().value > diff){
+                pq.poll();
+                pq.add(new Pair(diff, i));
+            }
+        }
+        for (int i=0;i<k;i++) System.out.println(pq.poll() + " ");
+
+    }
+    static class Pair
+    {
+        Integer key;
+        Integer value;
+
+        public Pair(Integer key, Integer value)
+        {
+            this.key = key;
+            this.value = value;
+        }
+        public Integer getKey()
+        {
+            return key;
+        }
+        public void setKey(Integer key)
+        {
+            this.key = key;
+        }
+        public Integer getValue()
+        {
+            return value;
+        }
+        public void setValue(Integer value)
+        {
+            this.value = value;
+        }
+    }
 
 
-     public static void main(String []args)
+
+    public static void main(String []args)
      {
          MinHeap h= new MinHeap(11);
          h.insert(3);
          h.insert(2);
          h.insert(15);
          h.insert(20);
-         h.getHeap();
-         h.extractHeap(0);
-         h.getHeap();
+
+        int[] arr={10,30,5,40,38,80,70};
+         printKthClosestElements(arr,3,35);
      }
 }
 
