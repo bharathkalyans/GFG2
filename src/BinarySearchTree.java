@@ -31,6 +31,33 @@ public class BinarySearchTree {
 
     }
 
+    public Node mirror(Node node){
+        if (node == null)
+            return null;
+
+        Node left = mirror(node.left);
+        Node right = mirror(node.right);
+
+        node.left = right;
+        node.right = left;
+
+        return node;
+
+//        if (root == null)
+//            return null ;
+//        root.left = mirrorTree(root.left);
+//        mirrorTree(root.right);
+//        swap(root,root.left,root.right);
+//
+//        return root;
+    }
+    public void swap(Node root,Node left,Node right){
+        Node res=null;
+        res  = root.right;
+        root.right = root.left;
+        root.left = res;
+
+    }
 
     public static int returnMax(Node head,int max){
         if (head == null)
