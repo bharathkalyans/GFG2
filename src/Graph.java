@@ -45,6 +45,88 @@ public class Graph {
             }
         }
     }
+
+    /*
+    *  public static void BFS(ArrayList<ArrayList<Integer>> adj,int v,int s,Boolean[] visited){
+
+        Queue<Integer> q=new LinkedList<>();
+
+        visited[s] = true;
+        q.add(s);
+
+        while(!q.isEmpty()){
+            int u = q.poll();
+            System.out.print(u+" ");
+
+            for (int x: adj.get(u)){
+                if (visited [x] == false){
+                    visited[x] = true;
+                    q.add(x);
+                }
+            }
+        }
+    }
+    * */
+
+    public static void BFSDiscontinuedGraph(ArrayList<ArrayList<Integer>> adj,int  v){
+        Boolean [] visited =new Boolean[v+1];
+        for (int i=0;i<v;i++){
+            visited[i] = false;
+        }
+
+        for (int i=0;i<v;i++){
+            if (visited[i] == false){
+//                BFS(adj,v,i,visited); Create a new function with extra parameter Boolean Visited.
+            }
+        }
+
+
+    }
+
+
+    /*Print no. of Islands in a Graph Problem :::
+
+     public static void BFS(ArrayList<ArrayList<Integer>> adj,int v,int s,Boolean[] visited){
+
+        Queue<Integer> q=new LinkedList<>();
+
+        visited[s] = true;
+        q.add(s);
+
+        while(!q.isEmpty()){
+            int u = q.poll();
+            System.out.print(u+" ");
+
+            for (int x: adj.get(u)){
+                if (visited [x] == false){
+                    visited[x] = true;
+                    q.add(x);
+                }
+            }
+        }
+    }
+
+
+    public static int  BFSDiscontinuedGraph(ArrayList<ArrayList<Integer>> adj,int  v){
+        Boolean [] visited =new Boolean[v+1];
+        for (int i=0;i<v;i++)
+            visited[i] = false;
+
+        int count =0;
+
+        for (int i=0;i<v;i++){
+            if (visited[i] == false){
+                BFS(adj,v,i,visited); Create a new function with extra parameter Boolean Visited.
+                count++;
+
+            }
+        }
+
+        return count; //count --> No. of Islands!
+
+    } */
+
+
     public static void main(String[] args) {
 
         int vertices = 5;
