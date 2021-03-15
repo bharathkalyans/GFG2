@@ -127,6 +127,27 @@ public class Graph {
     } */
 
 
+    public static void DFS(ArrayList<ArrayList<Integer>> adj,int v,int s){
+
+        Boolean visited[] =new Boolean[v];
+        for (int i=0;i<v;i++) visited[i] = false;
+
+        DFSRECURSIVE(adj,s,visited);
+
+    }
+
+
+    public static void DFSRECURSIVE(ArrayList<ArrayList<Integer>> adj ,int s,Boolean[] visited){
+
+        visited[s] =true;
+        System.out.print(s+ " " );
+
+        for (int x: adj.get(s))
+            if (!visited[x])
+                DFSRECURSIVE(adj, x, visited);
+
+    }
+
     public static void main(String[] args) {
 
         int vertices = 5;
@@ -146,7 +167,8 @@ public class Graph {
 
 
         BFS(adj,vertices,2);
-
+        System.out.println();
+        DFS(adj,vertices,0);
 
     }
 }
