@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Graph {
@@ -37,12 +36,11 @@ public class Graph {
             int u = q.poll();
             System.out.print(u+" ");
 
-            for (int x: adj.get(u)){
-                if (visited [x] == false){
+            for (int x: adj.get(u))
+                if (!visited[x]) {
                     visited[x] = true;
                     q.add(x);
                 }
-            }
         }
     }
 
@@ -75,7 +73,7 @@ public class Graph {
         }
 
         for (int i=0;i<v;i++){
-            if (visited[i] == false){
+            if (!visited[i]){
 //                BFS(adj,v,i,visited); Create a new function with extra parameter Boolean Visited.
             }
         }
@@ -86,7 +84,7 @@ public class Graph {
 
     /*Print no. of Islands in a Graph Problem :::
 
-     public static void BFS(ArrayList<ArrayList<Integer>> adj,int v,int s,Boolean[] visited){
+     public static void BFS(ArrayList<ArrayList<Integer>> adj,int s,Boolean[] visited){
 
         Queue<Integer> q=new LinkedList<>();
 
@@ -116,14 +114,11 @@ public class Graph {
 
         for (int i=0;i<v;i++){
             if (visited[i] == false){
-                BFS(adj,v,i,visited); Create a new function with extra parameter Boolean Visited.
+                BFS(adj,i,visited); Create a new function with extra parameter Boolean Visited.
                 count++;
-
             }
         }
-
         return count; //count --> No. of Islands!
-
     } */
 
 
@@ -148,27 +143,95 @@ public class Graph {
 
     }
 
+
+
+    public static void shortestPathFromSource(ArrayList<ArrayList<Integer>> adj,int v,int s){
+
+        Queue<Integer> q=new LinkedList<>();
+
+        int Distance[] = new int[v];
+        for (int i=0;i<v;i++)  Distance[i]=Integer.MAX_VALUE;
+
+        Distance[s] = 0;
+
+        Boolean visited[] = new Boolean[v];
+        for (int i=0;i<v;i++) visited[i] = false;
+
+        visited[s] = true;
+        q.add(s);
+
+        while (!q.isEmpty()){
+            int u=q.poll();
+
+            for (int x: adj.get(u)){
+                if (!visited[x]){
+                    visited[x] = true;
+                    q.add(x);
+                    Distance[x] = Distance[u] +1;
+                }
+            }
+
+        }
+
+        for (int x: Distance)
+            System.out.print(x+" ");
+
+    }
+
+    public static boolean detectCycleInGraphUnDirected(ArrayList<ArrayList<Integer>> adj, int vertices){
+        Boolean [] visited = new Boolean[vertices];
+        for (int i=0;i<vertices;i++) visited[i] = false;
+
+        for (int i=0;i<vertices;i++){
+            if (!visited[i]){
+                if (detectCycle(adj, visited, i, -1))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+    public static boolean detectCycle(ArrayList<ArrayList<Integer>> adj,
+                                      Boolean[] visited,
+                                      Integer source,
+                                      Integer parent) {
+        visited[source] = true;
+        for (int x:adj.get(source)){
+            if (!visited[x]){
+                if (detectCycle(adj,visited,x,source))
+                    return true;
+                else if (x!= parent)
+                    return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
 
         int vertices = 5;
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
 
         for (int i=0;i<vertices;i++)
-            adj.add(new ArrayList<Integer>());
+            adj.add(new ArrayList<>());
+
+        /*      //For Undirected Graph
+                addEdge(adj,0,1);
+                addEdge(adj,0,2);
+                addEdge(adj,1,2);
+                addEdge(adj,2,3);
+                addEdge(adj,1,3);
+                addEdge(adj,3,4);
+                addEdge(adj,2,4);*/
 
 
         addEdge(adj,0,1);
-        addEdge(adj,0,2);
-        addEdge(adj,1,2);
+        addEdge(adj,2,1);
         addEdge(adj,2,3);
-        addEdge(adj,1,3);
         addEdge(adj,3,4);
-        addEdge(adj,2,4);
+        addEdge(adj,4,5);
+        addEdge(adj,5,3);
 
-
-        BFS(adj,vertices,2);
-        System.out.println();
-        DFS(adj,vertices,0);
-
+        System.out.println(detectCycleInGraphUnDirected(adj,vertices));
     }
 }
