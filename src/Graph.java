@@ -4,15 +4,15 @@ public class Graph {
 
     public static void addEdge(ArrayList<ArrayList<Integer>> adj,int u,int v){
         adj.get(u).add(v);
-        adj.get(v).add(u);
+//        adj.get(v).add(u); //Only for Undirected Graphs...
     }
 
 
     public static void printGraph(ArrayList<ArrayList<Integer>> adj){
 
-        for (ArrayList<Integer> integers : adj) {
+        for (ArrayList<Integer> li : adj) {
 
-            for (Integer integer : integers) {
+            for (int integer : li) {
                 System.out.print(integer + " ");
             }
             System.out.println();
@@ -240,10 +240,22 @@ public class Graph {
         recursionStack[source] = false;
         return false;
     }
+    public static void inDegreeOfGraph(ArrayList<ArrayList<Integer>> adj,int vertices){
+        int [] inDegree =new int[vertices];
+        for (int i=0;i<vertices;i++) inDegree[i] =0;
+
+        for (ArrayList<Integer> x: adj)
+            for (int element : x)
+                inDegree[element] += 1;
+
+
+        for (int x: inDegree)
+            System.out.println(x);
+    }
 
     public static void main(String[] args) {
 
-        int vertices = 6;
+        int vertices = 5;
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
 
         for (int i=0;i<vertices;i++)
@@ -259,12 +271,14 @@ public class Graph {
                 addEdge(adj,2,4);*/
 
 
-        addEdge(adj,0,1);
-        addEdge(adj,2,1);
-        addEdge(adj,2,3);
-        addEdge(adj,3,4);
-        addEdge(adj,4,5);
-        addEdge(adj,5,3);
-        System.out.println(detectCycleDirected(adj,vertices));
+        addEdge(adj,0, 2);
+        addEdge(adj,0, 3);
+        addEdge(adj,1, 3);
+        addEdge(adj,1, 4);
+        addEdge(adj,2, 3);
+
+
+        }
     }
-}
+
+
