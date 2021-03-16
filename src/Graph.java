@@ -237,7 +237,7 @@ public class Graph {
             else if( recursionStack[x] == true)
                 return true;
         }
-
+        recursionStack[source] = false;
         return false;
     }
 
