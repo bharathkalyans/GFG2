@@ -207,9 +207,43 @@ public class Graph {
         return false;
     }
 
+
+    public static boolean detectCycleDirected(ArrayList<ArrayList<Integer>> adj,int vertices){
+        Boolean [] visited = new Boolean[vertices];
+        for (int i=0;i<vertices;i++) visited[i] = false;
+
+        Boolean [] recursionStack = new Boolean[vertices];
+        for (int i=0;i<vertices;i++) recursionStack[i] = false;
+
+
+        for (int i=0;i<vertices;i++)
+            if (visited[i] == false)
+                if (detectCycleInGraphDirected(adj, i, visited, recursionStack))
+                    return true;
+
+        return false;
+    }
+    public static boolean detectCycleInGraphDirected(ArrayList<ArrayList<Integer>> adj ,
+                                                     int source,
+                                                     Boolean[] visited,
+                                                     Boolean [] recursionStack){
+
+        visited[source] =true;
+        recursionStack[source] =true;
+
+        for (int x: adj.get(source)){
+            if (visited[x] == false && detectCycleInGraphDirected(adj,x,visited,recursionStack))
+                return true;
+            else if( recursionStack[x] == true)
+                return true;
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
 
-        int vertices = 5;
+        int vertices = 6;
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
 
         for (int i=0;i<vertices;i++)
@@ -231,7 +265,6 @@ public class Graph {
         addEdge(adj,3,4);
         addEdge(adj,4,5);
         addEdge(adj,5,3);
-
-        System.out.println(detectCycleInGraphUnDirected(adj,vertices));
+        System.out.println(detectCycleDirected(adj,vertices));
     }
 }
