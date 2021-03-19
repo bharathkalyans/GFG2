@@ -10,10 +10,11 @@ public class Graph {
 
     public static void printGraph(ArrayList<ArrayList<Integer>> adj){
 
-        for (ArrayList<Integer> li : adj) {
-
-            for (int integer : li) {
-                System.out.print(integer + " ");
+        for (int i = 0; i < adj.size(); i++) {
+            System.out.println("\nAdjacency list of vertex" + i);
+            System.out.print("head");
+            for (int j = 0; j < adj.get(i).size(); j++) {
+                System.out.print(" -> "+adj.get(i).get(j));
             }
             System.out.println();
         }
@@ -251,6 +252,35 @@ public class Graph {
 
         for (int x: inDegree)
             System.out.println(x);
+    }
+
+    static final int V=4;
+    public static int[] dijkstra(int graph[][], int src)
+    {
+
+        int[] dist=new int[V];int res=0;
+        Arrays.fill(dist,Integer.MAX_VALUE);dist[src]=0;
+        boolean[] fin=new boolean[V];
+
+        for (int count = 0; count < V-1 ; count++)
+        {
+            int u = -1;
+
+            //Finds the minimum value of all vertices
+            for(int i=0;i<V;i++)
+                if(!fin[i]&&(u==-1||dist[i]<dist[u]))
+                    u=i;
+
+            //Sets the vertex to visited
+            fin[u] = true;
+
+            //Relaxes the Adjacent vertices of the Vertex Selected .
+            for (int v = 0; v < V; v++)
+
+                if (graph[u][v]!=0 && fin[v] == false)
+                    dist[v] = Math.min(dist[v],dist[u]+graph[u][v]);//Relax Operation.
+        }
+        return dist;
     }
 
     public static void main(String[] args) {
