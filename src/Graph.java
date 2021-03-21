@@ -255,8 +255,7 @@ public class Graph {
     }
 
     static final int V=4;
-    public static int[] dijkstra(int graph[][], int src)
-    {
+    public static int[] dijkstra(int graph[][], int src) {
 
         int[] dist=new int[V];int res=0;
         Arrays.fill(dist,Integer.MAX_VALUE);dist[src]=0;
@@ -265,7 +264,7 @@ public class Graph {
         for (int count = 0; count < V-1 ; count++)
         {
             int u = -1;
-
+ 
             //Finds the minimum value of all vertices
             for(int i=0;i<V;i++)
                 if(!fin[i]&&(u==-1||dist[i]<dist[u]))
@@ -282,6 +281,16 @@ public class Graph {
         }
         return dist;
     }
+
+    public static void TopologicalSort(ArrayList<ArrayList<Integer>> adj,int v){
+        Boolean visited[]= new Boolean[v];
+        Arrays.fill(visited,false);
+
+
+
+
+    }
+
 
     public static void main(String[] args) {
 
