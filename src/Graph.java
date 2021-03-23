@@ -336,7 +336,7 @@ public class Graph {
 
                 // u is an articulation point in following cases
 
-                // (1) u is root of DFS tree and has two or more chilren.
+                // (1) u is root of DFS tree and has two or more children.
                 if (parent[u] == NIL && children > 1)
                     ap[u] = true;
 
