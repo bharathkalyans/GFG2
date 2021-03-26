@@ -1,8 +1,10 @@
+import java.util.Arrays;
+
 public class BackTracking {
 
     public static void permutationOfString(String string,String remaining){
         if (string.length() == 0)
-            System.out.println(remaining);
+            System.out.print(remaining+ " ");
 
         for (int i=0;i<string.length();i++){
             String newString = remaining + string.charAt(i);
@@ -20,8 +22,24 @@ public class BackTracking {
     }
 
 
+
+    public static void lexicographic(char[] chars, String res) {
+        if (res.length() == chars.length) {
+            System.out.print(res + " ");
+            return;
+        }
+
+        for (int i = 0; i < chars.length; i++) {
+            while (i + 1 < chars.length && chars[i] == chars[i + 1])
+                i++;
+
+            lexicographic(chars, res + chars[i]);
+        }
+    }
+
     public static void main(String[] args) {
 
         permute("ABC");
+        System.out.println();
     }
 }
