@@ -75,15 +75,16 @@ public class BackTracking {
             if (!result.contains(compare)) {
                 System.out.print(result+" ");
             }
-        }
+        }else{
+            if (!result.contains(compare)){
+                for (int i=0;i<string.length();i++) {
+                    String newResult = result + string.charAt(i);
+                    String remainingString = string.substring(0, i) +
+                            string.substring(i + 1);
 
-        for (int i=0;i<string.length();i++){
-            String newResult = result + string.charAt(i);
-            String remainingString = string.substring(0,i) +
-                    string.substring(i+1);
-
-            stringNotContainingAString(remainingString,newResult,compare);
-
+                    stringNotContainingAString(remainingString, newResult, compare);
+                }
+            }
         }
     }
 
@@ -91,6 +92,6 @@ public class BackTracking {
 
     public static void main(String[] args) {
 
-        stringNotContainingAString("ABCD","","v");
+        stringNotContainingAString("ABCD","","ABC");
     }
 }
