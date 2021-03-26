@@ -28,13 +28,19 @@ public class BackTracking {
             }
         }else{
             for(int i=l;i<=r;i++){
-                str=new String(swap(str, i, l));
-
-                stringNotContainingAString(str,l+1,r);
-
-                str=new String(swap(str, i, l));
+                if(isSafe(str,l,i,r)){//BackTracking Solution !!
+                    str=new String(swap(str, i, l));
+                    stringNotContainingAString(str,l+1,r);
+                    str=new String(swap(str, i, l));}
             }
         }
+    }
+    public static boolean isSafe(String str,int l, int i, int r){
+        if(l!=0 && str.charAt(l-1)=='A' && str.charAt(i)=='B')
+            return false;
+        if(r==(l+1) && str.charAt(i)=='A' && str.charAt(l)=='B')
+            return false;
+        return true;
     }
 
     public static char[] swap(String str, int i, int j) {
@@ -85,15 +91,6 @@ public class BackTracking {
 
     public static void main(String[] args) {
 
-        System.out.println("Normal Permutation");
-        permute("ABC");
-        System.out.println();
-
-        System.out.println("GFG Solution");
-        stringNotContainingAString("ABC",0,2);
-
-        System.out.println();
-        System.out.println("My Own Solution");
-        stringNotContainingAString("ABC","","AB");
+        stringNotContainingAString("ABCD","","v");
     }
 }
