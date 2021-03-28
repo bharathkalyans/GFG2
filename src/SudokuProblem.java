@@ -64,27 +64,21 @@ public class SudokuProblem {
         return false;
     }
 
-    public static void print(int[][] board, int N)
-    {
-        for (int r = 0; r < N; r++)
-        {
-            for (int d = 0; d < N; d++)
-            {
+    public static void print(int[][] board, int N) {
+        for (int r = 0; r < N; r++) {
+            for (int d = 0; d < N; d++) {
                 System.out.print(board[r][d]);
                 System.out.print(" ");
             }
             System.out.print("\n");
 
             if ((r + 1) % (int)Math.sqrt(N) == 0)
-            {
                 System.out.print("");
-            }
+
         }
     }
 
-    public static void main(String args[])
-    {
-
+    public static void main(String[] args) {
         int[][] board = new int[][] {
                 { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
                 { 5, 2, 0, 0, 0, 0, 0, 0, 0 },
@@ -99,12 +93,9 @@ public class SudokuProblem {
         int N = board.length;
 
         if (solveSudoku(board, N))
-        {
             print(board, N);
-        }
-        else {
+        else
             System.out.println("No solution");
-        }
     }
 //
 //    public static boolean isSafe(int i,int j,int n){
