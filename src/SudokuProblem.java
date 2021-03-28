@@ -97,7 +97,9 @@ public class SudokuProblem {
         else
             System.out.println("No solution");
     }
-//
+}
+
+/**
 //    public static boolean isSafe(int i,int j,int n){
 //
 //        for (int k=0;k< N;k++)
@@ -185,4 +187,4 @@ public class SudokuProblem {
 //        solve();
 //
 //    }
-}
+**/
