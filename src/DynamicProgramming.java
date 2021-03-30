@@ -14,17 +14,23 @@ public class DynamicProgramming {
     //DP Solution.
 
     public static void fibDP(int n){
-        int N =1000;
-         int[] memoizationArray =new int[N];
-         Arrays.fill(memoizationArray,-1);
-         fibonacciDP(23,memoizationArray);
+         int N =1000;
+         int[] DPArray =new int[N];
+         Arrays.fill(DPArray,-1);
+         fibonacciDP(23,DPArray);
 
-         for (int i=0;i< n;i++)
-            System.out.print( memoizationArray[i]+" ");
+         for (int i=0;i< n;i++) System.out.print( DPArray[i]+" ");
 
+         System.out.println();
+         System.out.println("-----------------------------");
 
+         Arrays.fill(DPArray,0);
+         fibonacciDp(n,DPArray);
+
+         for (int i=0;i< n;i++) System.out.print( DPArray[i]+" ");
 
     }
+    //Memoization technique(Top Down Approach)
     public static int fibonacciDP(int n,int[] array){
         if (array[n] == -1 ){
             int res = 0;
@@ -38,6 +44,15 @@ public class DynamicProgramming {
         return array[n];
     }
 
+    //Tabulation technique(Bottom Down Approach)
+    public static void fibonacciDp(int n,int [] array){
+        array[0] =0;
+        array[1] =1;
+
+        for (int i=2;i<=n;i++)
+            array[i] = array[i-1]+array[i-2];
+
+    }
 
     public static void main(String[] args) {
 
