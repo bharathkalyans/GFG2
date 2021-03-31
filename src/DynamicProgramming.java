@@ -55,7 +55,8 @@ public class DynamicProgramming {
     }
 
 
-   static void SubSequenceOfString(String instr, StringBuffer outstr, int index) {
+
+    static void SubSequenceOfString(String instr, StringBuffer outstr, int index) {
         for (int i = index; i < instr.length(); i++) {
 
             outstr.append(instr.charAt(i));
@@ -64,11 +65,24 @@ public class DynamicProgramming {
             outstr.deleteCharAt(outstr.length() - 1);
         }
     }
+
+
+    public static int LongestCommonSubSequence(String s1,String s2,int m,int n){
+        if (m ==0 || n==0)
+            return 0;
+
+        if (s1.charAt(m-1) == s2.charAt(n-1))
+            return 1 + LongestCommonSubSequence(s1,s2,m-1,n-1);
+        else
+            return Math.max(LongestCommonSubSequence(s1,s2,m-1,n),
+                    LongestCommonSubSequence(s1,s2,m,n-1));
+    }
+
+
     public static void main(String[] args) {
 
-    SubSequenceOfString("ABC",new StringBuffer(),0);
-
-
+        System.out.println("Longest SubSequence is "+
+                LongestCommonSubSequence("Bharath","Bharath", 7,7));
 
     }
 }
