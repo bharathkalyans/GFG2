@@ -188,12 +188,40 @@ public class DynamicProgramming {
             );
 
     }
+
+    public static int editDistanceDP(String s1, String s2, int m, int n){
+
+        int DP[][] = new int[m+1][n+1];
+
+
+        for (int i=0;i<=m;i++)
+            DP[i][0] = i;
+
+        for (int j=0;j<=n;j++)
+            DP[0][j] = j;
+
+
+        for (int i=1; i<=m;i++)
+            for (int j=1;j<=n;j++){
+                if (s1.charAt(i-1) == s2.charAt(j-1))
+                    DP[i][j] = DP[i-1][j-1];
+                else {
+                    DP[i][j] = 1 + Math.min(DP[i-1][j-1],
+                                   Math.min(DP[i][j-1],DP[i-1][j])
+                                    );
+                }
+            }
+
+        return DP[m][n];
+    }
+
     public static void main(String[] args) {
 
        String s1 = "saturday";
        String s2 ="sunday";
 
         System.out.println(editDistance(s1,s2,s1.length(),s2.length()));
+        System.out.println(editDistanceDP(s1,s2,s1.length(),s2.length()));
 
     }
 }
