@@ -137,24 +137,24 @@ public class DynamicProgramming {
         }
         return s;
     }
+
+    public static int coinChangeRecursive(int[] coins,int n,int sum){
+        if (sum == 0) return 1;
+        if (n == 0) return 0;
+
+        int res = coinChangeRecursive(coins,n-1,sum);
+
+        if (coins[n-1] <= sum)
+            res += coinChangeRecursive(coins,n,sum - coins[n-1]);
+
+
+        return res;
+    }
+
+
     public static void main(String[] args) {
 
-        String s1="ABC", s2= "BCD";
-
-        int n = s1.length();
-        int m = s2.length();
-
-        memo= new int[n+1][m+1];
-
-        for(int[] i: memo)
-            Arrays.fill(i,-1);
-
-
-        System.out.println(lcs(s1,s2,n,m));
-        printMemoTable();
-        Set<String > s = printLCS(s1,s2,n,m);
-
-        for (String ss: s)
-            System.out.println(ss);
+        int result = coinChangeRecursive(new int[]{1,2,3},3,4);
+        System.out.println(result);
     }
 }
