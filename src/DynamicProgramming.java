@@ -215,13 +215,45 @@ public class DynamicProgramming {
         return DP[m][n];
     }
 
+    public static void SubSequence(String instr, StringBuffer outstr, int index) {
+        for (int i = index; i < instr.length(); i++) {
+
+            outstr.append(instr.charAt(i));
+            System.out.println(outstr);
+            SubSequence(instr, outstr, i + 1);
+            outstr.deleteCharAt(outstr.length() - 1);
+        }
+    }
+
+    public static int LongestIncreasingSubSequence(int[] arr,int n){
+
+
+        int [] lis = new int[n];
+
+        lis[0] = 1;
+        for (int i=1;i<n;i++){
+            lis[i] = 1;
+            for (int j = 0;j<i;j++)
+                if (arr[i]>arr[j])
+                    lis[i] = Math.max(lis[i], lis[j] + 1);
+        }
+
+        int result = lis[0];
+        for (int i = 1 ;i < n;i++){
+            System.out.print(lis[i]+" ");
+            result = Math.max(result,lis[i]);
+        }
+
+        return result;
+
+    }
+
+
     public static void main(String[] args) {
 
-       String s1 = "saturday";
-       String s2 ="sunday";
+        int [] a = {3,4,2,8,10};
 
-        System.out.println(editDistance(s1,s2,s1.length(),s2.length()));
-        System.out.println(editDistanceDP(s1,s2,s1.length(),s2.length()));
+        System.out.println(LongestIncreasingSubSequence(a,a.length));
 
     }
 }
