@@ -278,12 +278,49 @@ public class DynamicProgramming {
         return r;
     }
 
+
+    //Below Function Time Complexity is O(n^3)!
+    public static int maxCutsRecursive(int n, int a, int b, int c){
+        if (n < 0 ) return -1;
+        if (n ==0 ) return 0;
+
+        int res = Math.max(maxCutsRecursive(n-a,a,b,c),
+                Math.max(maxCutsRecursive(n-b,a,b,c), maxCutsRecursive(n-c,a,b,c)));
+
+        if (res == -1)
+            return -1;
+
+        return res;
+    }
+
+    //DP Solution is below
+    public static int maxCuts(int n,int a,int b,int c){
+
+        int DP[] =new int[n+1];
+
+        DP[0] = 0;
+
+        for (int i=1;i<n;i++){
+            DP[i]  = -1;
+            if (i - a >= 0)
+                DP[i] = Math.max(DP[i],DP[i-a]);
+            if (i - b >= 0)
+                DP[i] = Math.max(DP[i],DP[i-b]);
+            if (i - c >= 0)
+                DP[i] = Math.max(DP[i],DP[i-c]);
+
+
+            if (DP[i]!=-1)
+                DP[i] = DP[i] + 1;
+
+        }
+
+
+        return DP[n];
+    }
     public static void main(String[] args) {
 
-        int [] a = {3,4,2,8,10};
 
-        System.out.println(LongestIncreasingSubSequence(a,a.length));
-        System.out.println(LongestIncreasingSubSequenceEff(a,a.length));
 
     }
 }
