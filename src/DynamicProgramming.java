@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.RecursiveTask;
 
 public class DynamicProgramming {
 
@@ -318,6 +319,26 @@ public class DynamicProgramming {
 
         return DP[n];
     }
+
+
+    public static int minimumCoinsRecursive(int [] coins,int n,int value){
+
+        if (value == 0) return 0;
+
+        int result = Integer.MAX_VALUE;
+
+        for (int i=0;i<n;i++){
+            if (coins[i] <= value){
+                int sub_res = minimumCoinsRecursive(coins,n,value - coins[i]);
+
+                if (sub_res!= Integer.MAX_VALUE)
+                    result = Math.min(result,sub_res);
+            }
+        }
+
+      return result;
+    }
+
     public static void main(String[] args) {
 
 
