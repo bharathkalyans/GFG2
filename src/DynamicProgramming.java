@@ -339,6 +339,26 @@ public class DynamicProgramming {
       return result;
     }
 
+    public static int minimumCoins(int[] coins,int n,int value){
+        int dp[]= new int[value+1];
+
+        Arrays.fill(dp,Integer.MAX_VALUE);
+        dp[0] = 0;
+
+        //Bottom Up Approach 😄
+        for (int i = 1;i <= value ;i++){
+            for (int j = 0;j<n;j++){
+                if (coins[j] <= i){
+                 int sub_res = dp[i - coins[j]] ;
+                     if (sub_res!= Integer.MAX_VALUE) {
+                         dp[i] = sub_res = + 1;
+                     }
+                }
+            }
+        }
+        return dp[value];
+    }
+
     public static void main(String[] args) {
 
 
