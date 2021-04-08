@@ -428,13 +428,27 @@ public class DynamicProgramming {
 
         return min + 1;
     }
+
+    public static int countBSTs(int n) {
+
+        int dp[] = new int[n+1];
+
+        dp[0] = 1;
+
+        for(int i=1; i<=n; i++)
+        {
+            dp[i] = 0;
+
+            for(int j=0; j<i; j++)
+            {
+                dp[i] += dp[j] * dp[i-j-1];
+            }
+        }
+
+        return dp[n];
+    }
     public static void main(String[] args) {
 
-        int n = 2, k = 10;
-        System.out.print("Minimum number of "
-                + "trials in worst case with "
-                + n + " eggs and " + k
-                + " floors is " + eggDrop(n, k));
 
     }
 }
