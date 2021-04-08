@@ -382,7 +382,7 @@ public class DynamicProgramming {
         return dp[n][W];
     }
 
-    public static int optimalStartegyGame(int[] arr, int n) {
+    public static int optimalStrategyGame(int[] arr, int n) {
         int dp[][] = new int[n][n];
 
         for(int i=0;i<n-1;i++)
@@ -403,9 +403,38 @@ public class DynamicProgramming {
 
         return dp[0][n-1];
     }
+
+    public static int eggDrop(int eggs, int floor) {
+
+        if (floor == 1 || floor == 0)
+            return floor;
+
+        if (eggs == 1)
+            return floor;
+
+        int min = Integer.MAX_VALUE;
+        int x, res;
+
+        // Consider all droppings from
+        // 1st floor to kth floor and
+        // return the minimum of these
+        // values plus 1.
+        for (x = 1; x <= floor; x++) {
+            res = Math.max(eggDrop(eggs - 1, x - 1),
+                    eggDrop(eggs, floor - x));
+            if (res < min)
+                min = res;
+        }
+
+        return min + 1;
+    }
     public static void main(String[] args) {
 
-
+        int n = 2, k = 10;
+        System.out.print("Minimum number of "
+                + "trials in worst case with "
+                + n + " eggs and " + k
+                + " floors is " + eggDrop(n, k));
 
     }
 }
